@@ -23,7 +23,7 @@ jobs:
   
   deploy-production:
     runs-on: ubuntu-latest
-    environment: 'Staging'
+    environment: 'Production'
     needs: [build-artifact, deploy-staging]
     steps:
       - name: Deploy to staging
