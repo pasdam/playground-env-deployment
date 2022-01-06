@@ -1,0 +1,34 @@
+name: CD
+
+on:
+  workflow_run:
+    branches:
+      - main
+    types:
+      - completed
+    workflows:
+      - 'CI'
+  workflow_dispatch:
+
+jobs:
+  build-artifact:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build
+        run: echo "Artifact build"
+  
+  deploy-staging:
+    runs-on: ubuntu-latest
+    environment: 'Staging'
+    needs: [build-artifact]
+    steps:
+      - name: Deploy to staging
+        run: echo "Deployed to staging"
+  
+  deploy-production:
+    runs-on: ubuntu-latest
+    environment: 'Staging'
+    needs: [build-artifact, deploy-staging]
+    steps:
+      - name: Deploy to staging
+        run: echo "Deployed to staging"
