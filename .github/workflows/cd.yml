@@ -13,13 +13,13 @@ jobs:
       - name: Associated PRs
         run: |
           set -e
-          echo "https://api.github.com/repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/pulls"
+          # echo "https://api.github.com/repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/pulls"
           PRS=$(curl --silent --show-error \
             -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/pulls)
-          echo "$PRS" | jq
+          # echo "$PRS" | jq
           PRS_COUNT=$(echo "$PRS" | jq -r 'length')
-          echo "$PRS_COUNT"
+          # echo "$PRS_COUNT"
           if [ "$PRS_COUNT" != "0" ]; then
             echo "$PRS" | jq -r '.[] | .html_url'
           else
