@@ -12,9 +12,10 @@ jobs:
     steps:
       - uses: hmarr/debug-action@v2
       - uses: actions/checkout@v2.4.0
-      - run: git config --add remote.origin.fetch +refs/pull/*/head:refs/remotes/origin/pull/*
-      - run: git fetch origin
-      - run: git describe --all  --contains ${GITHUB_SHA}
+      - run: |
+          curl \
+          -H "Accept: application/vnd.github.v3+json" \
+          https://api.github.com/repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/pulls | jq
 
   build-artifact:
     runs-on: ubuntu-latest
