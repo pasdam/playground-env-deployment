@@ -18,6 +18,7 @@ jobs:
             -H "Accept: application/vnd.github.v3+json" \
             -H "Authorization: token $GITHUB_TOKEN" \
             https://api.github.com/repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/pulls)
+          echo "$PRS" | jq
           PRS_COUNT=$(echo "$PRS" | jq -r 'length')
           echo "$PRS_COUNT"
           if [ "$PRS_COUNT" != "0" ]; then
