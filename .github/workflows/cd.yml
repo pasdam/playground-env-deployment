@@ -13,9 +13,9 @@ jobs:
       - name: Associated PRs
         run: |
           curl --silent --show-error \
-          -H "Accept: application/vnd.github.v3+json" \
-          -H "Authorization: token $GITHUB_TOKEN" \
-          https://api.github.com/repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/pulls? | jq -r '.[].html_url'
+            -H "Accept: application/vnd.github.v3+json" \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            https://api.github.com/repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/pulls | jq -r '.[].html_url'
 
   build-artifact:
     runs-on: ubuntu-latest
