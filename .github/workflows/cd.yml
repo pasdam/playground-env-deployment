@@ -13,6 +13,7 @@ jobs:
       - name: Associated PRs
         run: |
           set -e
+          echo "https://api.github.com/repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/pulls"
           PRS=$(curl --silent --show-error \
             -H "Accept: application/vnd.github.v3+json" \
             -H "Authorization: token $GITHUB_TOKEN" \
