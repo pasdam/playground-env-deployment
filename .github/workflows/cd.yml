@@ -11,6 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: hmarr/debug-action@v2
+      - uses: actions/checkout@v2.4.0
+      - run: |
+          git config --add remote.origin.fetch +refs/pull/*/head:refs/remotes/origin/pull/*
+          git fetch origin
+          git describe --all  --contains <COMMIT>
 
   build-artifact:
     runs-on: ubuntu-latest
