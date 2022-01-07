@@ -12,6 +12,7 @@ jobs:
     steps:
       - name: Associated PRs
         run: |
+          set -e
           PRS=$(curl --silent --show-error \
             -H "Accept: application/vnd.github.v3+json" \
             -H "Authorization: token $GITHUB_TOKEN" \
