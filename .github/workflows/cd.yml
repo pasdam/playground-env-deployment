@@ -12,10 +12,16 @@ jobs:
     steps:
       - name: Associated PRs
         run: |
-          curl --silent --show-error \
+          PRS=$(curl --silent --show-error \
             -H "Accept: application/vnd.github.v3+json" \
             -H "Authorization: token $GITHUB_TOKEN" \
-            https://api.github.com/repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/pulls | jq -r '.[] | .html_url'
+            https://api.github.com/repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/pulls)
+          PRS_COUNT=$(echo "$PRS" | jq -r 'length')
+          if [ $PRs_COUNT -gt 0]; then
+            echo "$PRS | jq -r '.[] | .html_url'
+          else
+            echo "No PR associated with this commit"
+          fi
 
   build-artifact:
     runs-on: ubuntu-latest
