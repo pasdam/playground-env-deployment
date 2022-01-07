@@ -1,10 +1,9 @@
 name: CD
 
 on:
-  pull_request_target:
-    branches: 
+  push:
+    branches:
       - main
-    types: [closed]
   workflow_dispatch:
 
 jobs:
@@ -14,7 +13,6 @@ jobs:
       - uses: hmarr/debug-action@v2
 
   build-artifact:
-    if: ${{ github.event.pull_request.merged }} # TODO: this breaks the workflow_dispatch event
     runs-on: ubuntu-latest
     steps:
       - name: Build
